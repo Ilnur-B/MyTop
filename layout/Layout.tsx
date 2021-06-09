@@ -7,17 +7,18 @@ import { Footer } from './Footer/Footer';
 import { Sidebar } from './Sidebar/Sidebar';
 
 const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {			//используется только для HOC
-	return <div {...props}>
-		<Header />
-		<div>
-			<Sidebar />
-			<div>
+	return (
+		<div {...props} className={styles.wrapper}>
+			<Header className={styles.header} />
+			<Sidebar className={styles.sidebar} />
+			<div className={styles.body}>
 				{children}
 			</div>
+			<Footer className={styles.footer} />
 		</div>
-		<Footer />
-	</div>;
+	);
 };
+
 
 export const withLayout = <T extends Record<string, unknown>>(Component: FunctionComponent<T>) => {				// HOC выносить в отдельный файл
 	return function withLayotComponent(props: T): JSX.Element {
